@@ -3,6 +3,9 @@ import { useSwipeable } from "react-swipeable";
 
 const SwipeableCard = () => {
   const [index, setIndex] = useState(0);
+  const [leftSwipes, setLeftSwipes] = useState(0);
+  const [rightSwipes, setRightSwipes] = useState(0);
+
   const cards = [
     { name: "Apple", img: "https://via.placeholder.com/200" },
     { name: "Banana", img: "https://via.placeholder.com/200" },
@@ -10,15 +13,20 @@ const SwipeableCard = () => {
   ];
 
   const handleSwipe = (direction) => {
+    if (direction === "left") setLeftSwipes(leftSwipes + 1);
+    if (direction === "right") setRightSwipes(rightSwipes + 1);
+
     if (index < cards.length - 1) {
       setIndex(index + 1);
+    } else {
+      setIndex(cards.length); // Triggers summary screen
     }
   };
 
   const handlers = useSwipeable({
     onSwipedLeft: () => handleSwipe("left"),
     onSwipedRight: () => handleSwipe("right"),
-    trackMouse: true, // ✅ Enables swiping with mouse
+    trackMouse: true,
   });
 
   return (
@@ -29,7 +37,11 @@ const SwipeableCard = () => {
           <h3>{cards[index].name}</h3>
         </div>
       ) : (
-        <h3>No more cards!</h3>
+        <div className="summary">
+          <h3>Summary</h3>
+          <p>👈 Swiped Left: {leftSwipes}</p>
+          <p>👉 Swiped Right: {rightSwipes}</p>
+        </div>
       )}
     </div>
   );
