@@ -3,6 +3,8 @@ import { useSwipeable } from "react-swipeable";
 
 const SwipeableCard = () => {
   const [index, setIndex] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState(""); // Track swipe direction
+
   const [leftSwipes, setLeftSwipes] = useState(0);
   const [rightSwipes, setRightSwipes] = useState(0);
 
@@ -13,14 +15,20 @@ const SwipeableCard = () => {
   ];
 
   const handleSwipe = (direction) => {
-    if (direction === "left") setLeftSwipes(leftSwipes + 1);
-    if (direction === "right") setRightSwipes(rightSwipes + 1);
+    setSwipeDirection(direction); // Set the direction for animation
 
-    if (index < cards.length - 1) {
-      setIndex(index + 1);
-    } else {
-      setIndex(cards.length); // Triggers summary screen
-    }
+    setTimeout(() => {
+      if (direction === "left") setLeftSwipes(leftSwipes + 1);
+      if (direction === "right") setRightSwipes(rightSwipes + 1);
+
+      if (index < cards.length - 1) {
+        setIndex(index + 1);
+      } else {
+        setIndex(cards.length); // Trigger summary
+      }
+
+      setSwipeDirection(""); // Reset animation
+    }, 300); // Delay removal for animation effect
   };
 
   const handlers = useSwipeable({
@@ -32,7 +40,7 @@ const SwipeableCard = () => {
   return (
     <div {...handlers} className="card-container">
       {index < cards.length ? (
-        <div className="card">
+        <div className={`card ${swipeDirection}`} key={cards[index].name}>
           <img src={cards[index].img} alt={cards[index].name} />
           <h3>{cards[index].name}</h3>
         </div>
