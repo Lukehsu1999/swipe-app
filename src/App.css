@@ -28,6 +28,45 @@
   color: #61dafb;
 }
 
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  position: relative;
+}
+
+.card {
+  width: 250px;
+  height: 300px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.card img {
+  width: 100%;
+  height: 80%;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 10px 0;
+}
+
+.summary {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
