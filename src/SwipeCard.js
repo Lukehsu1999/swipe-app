@@ -9,9 +9,9 @@ const SwipeableCard = () => {
   const [rightSwipes, setRightSwipes] = useState(0);
 
   const cards = [
-    { name: "Apple", img: "https://via.placeholder.com/200" },
-    { name: "Banana", img: "https://via.placeholder.com/200" },
-    { name: "Cherry", img: "https://via.placeholder.com/200" }
+    { name: "Apple", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_1.jpg" },
+    { name: "Banana", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_2.jpg" },
+    { name: "Cherry", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_3.jpg"}
   ];
 
   const handleSwipe = (direction) => {
