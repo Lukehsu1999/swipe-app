@@ -9,9 +9,17 @@ const SwipeableCard = () => {
   const [rightSwipes, setRightSwipes] = useState(0);
 
   const cards = [
-    { name: "Apple", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_1.jpg" },
-    { name: "Banana", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_2.jpg" },
-    { name: "Cherry", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_3.jpg"}
+    { name: "Fushimi Inaria Taisha Shrine", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_1.jpg" },
+    { name: "Fushimi Inaria Taisha Shrine", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_2.jpg" },
+    { name: "Fushimi Inaria Taisha Shrine", img: "/card_pictures/Kyoto/Fushimi_Inari_Taisha_Shrine_3.jpg"},
+    { name: "Kinkakuji Temple", img: "/card_pictures/Kyoto/Kinkakuji_Temple_1.jpg"},
+    { name: "Kinkakuji Temple", img: "/card_pictures/Kyoto/Kinkakuji_Temple_2.jpg"},
+    { name: "Kinkakuji Temple", img: "/card_pictures/Kyoto/Kinkakuji_Temple_3.jpg"},
+    { name: "Kiyomizu-dera Temple", img: "/card_pictures/Kyoto/Kiyomizu_dera_Temple_1.jpg"},
+    { name: "Kiyomizu-dera Temple", img: "/card_pictures/Kyoto/Kiyomizu_dera_Temple_2.jpg"},
+    { name :"Arashiyama", img: "/card_pictures/Kyoto/Arashiyama_1.jpg"},
+    { name :"Arashiyama", img: "/card_pictures/Kyoto/Arashiyama_2.jpg"},
+    { name :"Arashiyama", img: "/card_pictures/Kyoto/Arashiyama_3.jpg"}
   ];
 
   const handleSwipe = (direction) => {
