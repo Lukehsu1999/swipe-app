@@ -8,6 +8,8 @@ const SwipeableCard = () => {
   const [leftSwipes, setLeftSwipes] = useState(0);
   const [rightSwipes, setRightSwipes] = useState(0);
 
+  const [likedPlaces, setLikedPlaces] = useState([]); // Track liked places
+
   const cards = [
     { name: "Philosopher's Walk", type: "video", video: "/card_pictures/Kyoto/Philosophers_walk_4.mp4" },
     { name: "Samurai & Ninja Museum", type: "image", img: "/card_pictures/Kyoto/Samurai_ninja_museum_1.jpg" },
@@ -35,7 +37,10 @@ const SwipeableCard = () => {
 
     setTimeout(() => {
       if (direction === "left") setLeftSwipes(leftSwipes + 1);
-      if (direction === "right") setRightSwipes(rightSwipes + 1);
+      if (direction === "right") {
+        setRightSwipes(rightSwipes + 1);
+        setLikedPlaces((prevLikedPlaces) => [...prevLikedPlaces, cards[index].name]);
+      }
 
       if (index < cards.length - 1) {
         setIndex(index + 1);
@@ -72,6 +77,12 @@ const SwipeableCard = () => {
           <h3>Summary</h3>
           <p>👈 Swiped Left: {leftSwipes}</p>
           <p>👉 Swiped Right: {rightSwipes}</p>
+          <h4>Liked Places:</h4>
+          <ul>
+            {likedPlaces.map((place, i) => (
+              <li key={i}>{place}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
