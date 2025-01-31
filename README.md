@@ -1,6 +1,15 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Travel Easy
+
+## How to run
+### Start the Backend
+```
+cd backend
+```
+### Start the Frontend
+```
+cd frontend
+```
 ## Images Reference:
 Wikimedia
 Unsplash
