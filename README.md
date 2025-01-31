@@ -4,6 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Images Reference:
 Wikimedia
 Unsplash
+Samurai Ninja Museum: TripAdvisor
 
 ## Available Scripts
 

@@ -9,6 +9,10 @@ const SwipeableCard = () => {
   const [rightSwipes, setRightSwipes] = useState(0);
 
   const cards = [
+    { name: "Samurai & Ninja Museum", img: "/card_pictures/Kyoto/Samurai_ninja_museum_1.jpg" },
+    { name: "Samurai & Ninja Museum", img: "/card_pictures/Kyoto/Samurai_ninja_museum_2.jpeg" },
+    { name: "Nijo Castle", img: "/card_pictures/Kyoto/Nijo_castle_1.jpg" },
+    { name: "Nijo Castle", img: "/card_pictures/Kyoto/Nijo_castle_2.jpg" },
     { name: "Gion", img: "/card_pictures/Kyoto/Gion_1.jpg" },
     { name: "Gion", img: "/card_pictures/Kyoto/Gion_2.jpg" },
     { name: "Gion", img: "/card_pictures/Kyoto/Gion_3.jpg" },
