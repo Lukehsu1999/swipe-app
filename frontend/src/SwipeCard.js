@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
+import axios from "axios";
 
 const SwipeableCard = () => {
   const [index, setIndex] = useState(0);
@@ -9,8 +10,12 @@ const SwipeableCard = () => {
   const [rightSwipes, setRightSwipes] = useState(0);
 
   const [likedPlaces, setLikedPlaces] = useState([]); // Track liked places
+  const [itinerary, setItinerary] = useState(""); // Store generated itinerary
 
-  const cards = [
+  const [cards, setCards] = useState([]); // Store randomly selected cards
+
+
+  const allCards = [
     { name: "Philosopher's Walk", type: "video", video: "/card_pictures/Kyoto/Philosophers_walk_4.mp4" },
     { name: "Samurai & Ninja Museum", type: "image", img: "/card_pictures/Kyoto/Samurai_ninja_museum_1.jpg" },
     { name: "Samurai & Ninja Museum", type: "image", img: "/card_pictures/Kyoto/Samurai_ninja_museum_2.jpeg" },
@@ -31,6 +36,12 @@ const SwipeableCard = () => {
     { name :"Arashiyama", type: "image", img: "/card_pictures/Kyoto/Arashiyama_2.jpg"},
     { name :"Arashiyama", type: "image", img: "/card_pictures/Kyoto/Arashiyama_3.jpg"}
   ];
+
+  // Function to shuffle and select 10 random cards
+  useEffect(() => {
+    const shuffled = [...allCards].sort(() => 0.5 - Math.random()); // Shuffle array
+    setCards(shuffled.slice(0, 10)); // Take first 10 elements
+  }, []);
 
   const handleSwipe = (direction) => {
     setSwipeDirection(direction); // Set the direction for animation
@@ -58,6 +69,21 @@ const SwipeableCard = () => {
     trackMouse: true,
   });
 
+  // ✅ Fixed generate_itinerary function
+  const generate_itinerary = async () => {
+    console.log("Generating itinerary...");
+    try {
+      const response = await axios.post("http://localhost:5001/chat", {
+        message: `Generate a two-day trip plan in Kyoto based on these places: ${likedPlaces.join(", ")}`,
+      });
+
+      setItinerary(response.data.reply); // Store response in state
+    } catch (error) {
+      console.error("Error generating itinerary:", error);
+      setItinerary("Failed to generate itinerary. Please try again.");
+    }
+  };
+
   return (
     <div {...handlers} className="card-container">
       {index < cards.length ? (
@@ -83,6 +109,13 @@ const SwipeableCard = () => {
               <li key={i}>{place}</li>
             ))}
           </ul>
+          <button onClick={() => generate_itinerary()}>Generate itinary</button>
+          {itinerary && (
+            <div className="itinerary">
+              <h3>Generated Itinerary:</h3>
+              <p>{itinerary}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
