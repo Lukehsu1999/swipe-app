@@ -14,6 +14,8 @@ const SwipeableCard = () => {
 
   const [cards, setCards] = useState([]); // Store randomly selected cards
 
+  const [isGenerating, setIsGenerating] = useState(false); // Track button state
+
 
   const allCards = [
     { name: "Philosopher's Walk", type: "video", video: "/card_pictures/Kyoto/Philosophers_walk_4.mp4" },
@@ -71,6 +73,7 @@ const SwipeableCard = () => {
 
   // ✅ Fixed generate_itinerary function
   const generate_itinerary = async () => {
+    setIsGenerating(true); // Disable button while generating
     console.log("Generating itinerary...");
     try {
       const response = await axios.post("http://localhost:5001/chat", {
@@ -81,6 +84,8 @@ const SwipeableCard = () => {
     } catch (error) {
       console.error("Error generating itinerary:", error);
       setItinerary("Failed to generate itinerary. Please try again.");
+    } finally {
+      setIsGenerating(false); // Enable button after generating
     }
   };
 
@@ -109,7 +114,9 @@ const SwipeableCard = () => {
               <li key={i}>{place}</li>
             ))}
           </ul>
-          <button onClick={() => generate_itinerary()}>Generate itinary</button>
+          <button onClick={() => generate_itinerary()} disabled={isGenerating}>
+           {isGenerating ? "Generating..." : "Generate Itinerary"}
+          </button>
           {itinerary && (
             <div className="itinerary">
               <h3>Generated Itinerary:</h3>
