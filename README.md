@@ -5,10 +5,13 @@
 ### Start the Backend
 ```
 cd backend
+node server.js
 ```
+visit localhost:5001/chat
 ### Start the Frontend
 ```
 cd frontend
+npm start
 ```
 ## Images Reference:
 Wikimedia
