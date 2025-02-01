@@ -1,5 +1,5 @@
 import React from "react";
-import SwipeCard from "./SwipeCard";
+import SwipeCard from "./components/SwipeCard";
 import allCards from "./cardData";
 import "./App.css";
 
