@@ -14,6 +14,7 @@ const SwipeableCard = ({cards}) => {
   const [itinerary, setItinerary] = useState(""); // Store generated itinerary
 
   const [isGenerating, setIsGenerating] = useState(false); // Track button state
+  const [showItinerary, setShowItinerary] = useState(false);
 
 
   const handleSwipe = (direction) => {
@@ -54,6 +55,7 @@ const SwipeableCard = ({cards}) => {
       });
 
       setItinerary(response.data.reply); // Store response in state
+      setShowItinerary(true); 
     } catch (error) {
       console.error("Error generating itinerary:", error);
       setItinerary("Failed to generate itinerary. Please try again.");
@@ -78,14 +80,16 @@ const SwipeableCard = ({cards}) => {
         </div>
       ) : (
         <>
-          <SwipeResults
-            leftSwipes={leftSwipes}
-            rightSwipes={rightSwipes}
-            likedPlaces={likedPlaces}
-            generateItinerary={generate_itinerary}
-            isGenerating={isGenerating}
-          />
-          {itinerary && (
+         {!showItinerary && (
+            <SwipeResults
+              leftSwipes={leftSwipes}
+              rightSwipes={rightSwipes}
+              likedPlaces={likedPlaces}
+              generateItinerary={generate_itinerary}
+              isGenerating={isGenerating}
+            />
+         )}
+          {showItinerary && itinerary && (
             <div className="itinerary">
               <h3>Generated Itinerary:</h3>
               <p>{itinerary}</p>
