@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
-const { normalItineraryPrompt, formattedItineraryPrompt } = require("./prompts");
+const { chineseItineraryPrompt, normalItineraryPrompt, formattedItineraryPrompt } = require("./prompts");
 
 const app = express();
 app.use(express.json());
@@ -13,7 +13,7 @@ const PORT = 5001;
 app.post("/chat", async (req, res) => {
   try {
     const { message } = req.body;
-    const prompt = normalItineraryPrompt(message);
+    const prompt = chineseItineraryPrompt(message);
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
