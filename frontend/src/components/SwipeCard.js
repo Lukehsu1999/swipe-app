@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
+import SwipeResults from "./SwipeResults";
 import axios from "axios";
 
 const SwipeableCard = ({cards}) => {
@@ -76,26 +77,21 @@ const SwipeableCard = ({cards}) => {
           <h3>{cards[index].name}</h3>
         </div>
       ) : (
-        <div className="summary">
-          <h3>Summary</h3>
-          <p>👈 Swiped Left: {leftSwipes}</p>
-          <p>👉 Swiped Right: {rightSwipes}</p>
-          <h4>Liked Places:</h4>
-          <ul>
-            {likedPlaces.map((place, i) => (
-              <li key={i}>{place}</li>
-            ))}
-          </ul>
-          <button onClick={() => generate_itinerary()} disabled={isGenerating}>
-           {isGenerating ? "Generating..." : "Generate Itinerary"}
-          </button>
+        <>
+          <SwipeResults
+            leftSwipes={leftSwipes}
+            rightSwipes={rightSwipes}
+            likedPlaces={likedPlaces}
+            generateItinerary={generate_itinerary}
+            isGenerating={isGenerating}
+          />
           {itinerary && (
             <div className="itinerary">
               <h3>Generated Itinerary:</h3>
               <p>{itinerary}</p>
             </div>
           )}
-        </div>
+          </>
       )}
     </div>
   );
