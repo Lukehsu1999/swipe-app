@@ -8,8 +8,10 @@ const SwipeResults = ({ leftSwipes, rightSwipes, likedPlaces, generateItinerary,
       <p>👉 Swiped Right: {rightSwipes}</p>
       <h4>Liked Places:</h4>
       <ul>
-        {likedPlaces.map((place, i) => (
-          <li key={i}>{place}</li>
+        {Object.entries(likedPlaces).map(([place, count]) => (
+          <li key={place}>
+            <strong>{place}</strong> - Liked {count} {count === 1 ? "time" : "times"}
+          </li>
         ))}
       </ul>
       <button onClick={generateItinerary} disabled={isGenerating}>

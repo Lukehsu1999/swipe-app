@@ -10,7 +10,7 @@ const SwipeableCard = ({cards}) => {
   const [leftSwipes, setLeftSwipes] = useState(0);
   const [rightSwipes, setRightSwipes] = useState(0);
 
-  const [likedPlaces, setLikedPlaces] = useState([]); // Track liked places
+  const [likedPlaces, setLikedPlaces] = useState({}); // Track liked places
   const [itinerary, setItinerary] = useState(""); // Store generated itinerary
 
   const [isGenerating, setIsGenerating] = useState(false); // Track button state
@@ -26,7 +26,13 @@ const SwipeableCard = ({cards}) => {
       if (direction === "left") setLeftSwipes(leftSwipes + 1);
       if (direction === "right") {
         setRightSwipes(rightSwipes + 1);
-        setLikedPlaces((prevLikedPlaces) => [...prevLikedPlaces, cards[index].name]);
+        const placeName = cards[index]?.name;
+        if (placeName) {
+          setLikedPlaces((prevLikedPlaces) => ({
+            ...prevLikedPlaces,
+            [placeName]: (prevLikedPlaces[placeName] || 0) + 1, 
+          }));
+        }
       }
 
       if (index < cards.length - 1) {
@@ -48,10 +54,13 @@ const SwipeableCard = ({cards}) => {
   // ✅ Fixed generate_itinerary function
   const generate_itinerary = async () => {
     setIsGenerating(true); // Disable button while generating
+
     console.log("Generating itinerary...");
     try {
       const response = await axios.post("http://localhost:5001/chat", {
-        message: `Generate a two-day trip plan in Kyoto based on these places: ${likedPlaces.join(", ")}`,
+        message: `Generate a two-day trip plan in Kyoto based on these places
+        The user has prioritized these places as follows (higher values mean higher priority): 
+        ${JSON.stringify(likedPlaces)}}`,
       });
 
       setItinerary(response.data.reply); // Store response in state
