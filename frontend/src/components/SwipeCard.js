@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import SwipeResults from "./SwipeResults";
+import Itinerary from "./Itinerary";
 import axios from "axios";
 
 const SwipeableCard = ({cards}) => {
@@ -11,7 +12,7 @@ const SwipeableCard = ({cards}) => {
   const [rightSwipes, setRightSwipes] = useState(0);
 
   const [likedPlaces, setLikedPlaces] = useState({}); // Track liked places
-  const [itinerary, setItinerary] = useState(""); // Store generated itinerary
+  const [itinerary, setItinerary] = useState({}); // Store generated itinerary
 
   const [isGenerating, setIsGenerating] = useState(false); // Track button state
   const [showItinerary, setShowItinerary] = useState(false);
@@ -62,8 +63,9 @@ const SwipeableCard = ({cards}) => {
         The user has prioritized these places as follows (higher values mean higher priority): 
         ${JSON.stringify(likedPlaces)}}`,
       });
-
-      setItinerary(response.data.reply); // Store response in state
+      const rawData = response.data.reply;
+      const parsedItinerary = JSON.parse(rawData);
+      setItinerary(parsedItinerary); // Store response in state
       setShowItinerary(true); 
     } catch (error) {
       console.error("Error generating itinerary:", error);
@@ -99,10 +101,7 @@ const SwipeableCard = ({cards}) => {
             />
          )}
           {showItinerary && itinerary && (
-            <div className="itinerary">
-              <h3>Generated Itinerary:</h3>
-              <p>{itinerary}</p>
-            </div>
+            <Itinerary itinerary={itinerary} />
           )}
           </>
       )}
