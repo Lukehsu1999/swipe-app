@@ -13,7 +13,7 @@ const PORT = 5001;
 app.post("/chat", async (req, res) => {
   try {
     const { message } = req.body;
-    const prompt = chineseItineraryPrompt(message);
+    const prompt = formattedItineraryPrompt(message);
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
