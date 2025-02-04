@@ -4,6 +4,7 @@ import SwipeResults from "./SwipeResults";
 import Itinerary from "./Itinerary";
 import ItineraryText from "./ItineraryText";
 import axios from "axios";
+import { formattedItineraryPrompt, normalItineraryPrompt, chineseItineraryPrompt } from "./frontend_prompts";
 
 const SwipeableCard = ({cards}) => {
   const [index, setIndex] = useState(0);
@@ -61,9 +62,10 @@ const SwipeableCard = ({cards}) => {
     console.log("Generating itinerary...");
     try {
       const response = await axios.post("https://7ubw6ka6n1.execute-api.us-east-1.amazonaws.com/chat", {
-        message: `Generate a two-day trip plan in Kyoto based on these places
-        The user has prioritized these places as follows (higher values mean higher priority), keep it brief: 
-        ${JSON.stringify(likedPlaces)}}`,
+        // message: `Generate a two-day trip plan in Kyoto based on these places
+        // The user has prioritized these places as follows (higher values mean higher priority), keep it brief: 
+        // ${JSON.stringify(likedPlaces)}}`,
+        message: normalItineraryPrompt(JSON.stringify(likedPlaces)),
       });
       const rawData = response.data.reply;
       setItineraryText(rawData); // Store response in state
