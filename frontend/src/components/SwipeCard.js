@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import SwipeResults from "./SwipeResults";
 import Itinerary from "./Itinerary";
+import ItineraryText from "./ItineraryText";
 import axios from "axios";
 
 const SwipeableCard = ({cards}) => {
@@ -13,6 +14,7 @@ const SwipeableCard = ({cards}) => {
 
   const [likedPlaces, setLikedPlaces] = useState({}); // Track liked places
   const [itinerary, setItinerary] = useState({}); // Store generated itinerary
+  const [itineraryText, setItineraryText] = useState(""); // Store generated itinerary text
 
   const [isGenerating, setIsGenerating] = useState(false); // Track button state
   const [showItinerary, setShowItinerary] = useState(false);
@@ -58,14 +60,15 @@ const SwipeableCard = ({cards}) => {
 
     console.log("Generating itinerary...");
     try {
-      const response = await axios.post("http://localhost:5001/chat", {
+      const response = await axios.post("https://7ubw6ka6n1.execute-api.us-east-1.amazonaws.com/chat", {
         message: `Generate a two-day trip plan in Kyoto based on these places
-        The user has prioritized these places as follows (higher values mean higher priority): 
+        The user has prioritized these places as follows (higher values mean higher priority), keep it brief: 
         ${JSON.stringify(likedPlaces)}}`,
       });
       const rawData = response.data.reply;
-      const parsedItinerary = JSON.parse(rawData);
-      setItinerary(parsedItinerary); // Store response in state
+      setItineraryText(rawData); // Store response in state
+      //const parsedItinerary = JSON.parse(rawData);
+      //setItinerary(parsedItinerary); // Store response in state
       setShowItinerary(true); 
     } catch (error) {
       console.error("Error generating itinerary:", error);
@@ -100,8 +103,11 @@ const SwipeableCard = ({cards}) => {
               isGenerating={isGenerating}
             />
          )}
-          {showItinerary && itinerary && (
+          {/* {showItinerary && itinerary && (
             <Itinerary itinerary={itinerary} />
+          )} */}
+          {showItinerary && itinerary && (
+            <ItineraryText itineraryText={itineraryText} />
           )}
           </>
       )}
