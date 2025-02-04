@@ -8,6 +8,15 @@ cd backend
 node server.js
 ```
 visit localhost:5001/chat
+
+### Alternative, host the backend on AWS
+check openai_relay
+```
+cd openai_relay
+zip -r openai-lambda.zip index.mjs node_modules package.json package-lock.json
+```
+place the zipped file on AWS lambda
+
 ### Start the Frontend
 ```
 cd frontend
