@@ -22,6 +22,32 @@ place the zipped file on AWS lambda
 cd frontend
 npm start
 ```
+
+### Alternatively, Host frontend on AWS S3
+```
+cd frontend
+npm run build
+```
+1. Create Bucket on AWS S3
+2. Uncheck "Block all public access"
+3. Bucket Properties -> Static Website Hosting: enable, index document = index.html
+4. upload items in build folder to S3 Bucket
+5. update bucket policy:
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::your-website-name/*"
+        }
+    ]
+}
+
+```
 ## Images Reference:
 Wikimedia
 Unsplash
