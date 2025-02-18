@@ -37,3 +37,6 @@ Thumbs.db
 .pnp.js
 
 openai-lambda.zip
+
+# Builds
+/frontend/build
