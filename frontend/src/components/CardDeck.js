@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import SwipeableCard from "./SwipeableCard";
+import Card from "./Card";
 import SwipeResults from "./SwipeResults";
 import ItineraryText from "./ItineraryText";
 import axios from "axios";
@@ -70,7 +70,7 @@ const CardDeck = ({ cards }) => {
   return (
     <div {...handlers} className="card-container">
       {index < cards.length ? (
-        <SwipeableCard card={cards[index]} swipeDirection={swipeDirection} />
+        <Card card={cards[index]} swipeDirection={swipeDirection} />
       ) : (
         <>
           {!showItinerary && (
