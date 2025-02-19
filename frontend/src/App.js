@@ -1,5 +1,6 @@
 import React from "react";
 import SwipeCard from "./components/SwipeCard";
+import CardDeck from "./components/CardDeck";
 import allCards from "./cardData";
 import "./App.css";
 
@@ -14,7 +15,7 @@ function App() {
   return (
     <div>
       <h1>Swipe App</h1>
-      <SwipeCard cards={selectedCards}/>
+      <CardDeck cards={selectedCards}/>
     </div>
   );
 }
