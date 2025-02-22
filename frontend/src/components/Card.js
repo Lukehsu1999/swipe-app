@@ -25,7 +25,7 @@ const Card = ({ card, swipeDirection }) => {
           <button onClick={toggleDescription} className="toggle-btn">
             {expanded ? "⬆️" : "⬇️"}
           </button>
-          {expanded && <p className="description">{card.description}</p>}
+          {expanded && <p className="description" style={{ fontSize: "10px", textAlign: "justify" }}>{card.description}</p>}
         </>
       )}
     </div>
