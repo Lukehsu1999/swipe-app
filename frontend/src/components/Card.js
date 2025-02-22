@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Card = ({ card, swipeDirection }) => {
   const [expanded, setExpanded] = useState(false);
+
+  // Reset expanded state whenever the card changes
+  useEffect(() => {
+    setExpanded(false);
+  }, [card]);
 
   const toggleDescription = () => {
     setExpanded(!expanded);
